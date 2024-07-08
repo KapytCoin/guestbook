@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
@@ -24,7 +23,7 @@ class Comment
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $cratedAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -74,14 +73,14 @@ class Comment
         return $this;
     }
 
-    public function getCratedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->cratedAt;
+        return $this->createdAt;
     }
 
-    public function setCratedAt(\DateTimeImmutable $cratedAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->cratedAt = $cratedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
