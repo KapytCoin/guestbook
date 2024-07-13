@@ -34,7 +34,6 @@ class ConferenceController extends AbstractController
         Request $request,
         Conference $conference,
         CommentRepository $commentRepository,
-        SpamChecker $spamChecker,
         #[Autowire('%photo_dir%')] string $photoDir,
     ): Response {
         $comment = new Comment();
@@ -55,11 +54,7 @@ class ConferenceController extends AbstractController
                     'user_agent' => $request->headers->get('user-agent'),
                     'referrer' => $request->headers->get('referer'),
                     'permalink' => $request->getUri(),
-            ];
-            if (2 === $spamChecker->getSpamScore($comment, $context)) {
-            throw new \RuntimeException('Blatant spam, go away!');
-            }
-                
+            ];  
             $this->entityManager->flush();
 
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
